@@ -1,0 +1,122 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.tw-followCard-avatar{
+  width: 48px;
+  height: 48px;
+  border-radius: 1000px;
+}
+
+.tw-followCard-info{
+  display: flex;
+  flex-direction: column;
+}
+
+.tw-followCard-header{
+  display: flex;
+  align-items: center;
+  gap:4px;
+}
+
+.tw-followCard-infoUserName{
+  opacity: .6;
+
+}
+.tw-followCard-button {
+  margin-left: 16px;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-weight: bold;
+  transition: .3s ease background-color;
+
+}
+.tw-followCard-button:hover{
+  background-color: aqua;
+}
+.tw-followCard-button.is-following{
+  border: 1px solid red;
+  background-color: rgb(190, 60, 81);
+}
+.tw-followCard-button.is-following:hover{
+  background-color: rgb(153, 0, 102);
+
+}
+.tw-followCard{
+  display: flex;
+  align-items: cent4er;
+  color:#fff;
+  font-size: .8rem;
+}
+
+.App{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
