@@ -1,12 +1,56 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
+
+function ExpandedImageModal({ photo, onClose }) {
+  console.log(" ExpandedImageModal img_src",photo.img_src)
+  console.log(" ExpandedImageModal img",photo)
+  return (
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
+      <div className="bg-black bg-opacity-80 w-full h-full absolute"></div>
+      <div className="max-w-3xl w-full p-4 bg-white rounded-lg z-10 overflow-hidden">
+        <img
+          src={photo.img_src}
+          alt=""
+          className="rounded-lg"
+          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+        />
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 bg-gray-800 text-white rounded-full hover:bg-gray-600 focus:outline-none"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
 const PhotoList = ({ rover, sol, camera, page, apiKey }) => {
   const [photos, setPhotos] = useState([]);
   const [selectedRover, setSelectedRover] = useState("");
   const [rovers, setRovers] = useState([]);
   const [cameras, setCameras] = useState([]);
   const [selectedCamera, setSelectedCamera]=useState("")
+  const [expandedImage, setExpandedImage]=useState(null);
+  const [expandedImageSrc, setExpandedImageSrc]=useState(null);
+  const handleImageClick=(photo)=>{
+    console.log("Clicked photo:", photo);
+
+    setExpandedImage(photo);
+  }
+
+  const handleCloseClick=()=>{
+    setExpandedImage(null);
+  }
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +111,9 @@ const PhotoList = ({ rover, sol, camera, page, apiKey }) => {
   }, [selectedCamera,selectedRover, apiKey]);
 
   return (
+
     <div className="mb-4">
+
     <h2 className="text-xl font-semibold mb-4">Photos from Mars </h2>
   
     <div className="mb-4 flex flex-col sm:flex-row">
@@ -113,14 +159,19 @@ const PhotoList = ({ rover, sol, camera, page, apiKey }) => {
             <img
               src={photo.img_src}
               alt=""
-              className="w-full h-full object-cover rounded-md transition-transform transform group-hover:scale-105"
-            />
+              className="w-full h-full object-cover rounded-md transition-transform transform group-hover:scale-110"
+              onClick={()=>handleImageClick(photo)}
+          />
           </li>
+
         ))
       ) : (
         <li className="text-center"> No photos available </li>
       )}
     </ul>
+    {expandedImage && <ExpandedImageModal photo={expandedImage} onClose={handleCloseClick} />}
+
+
   </div>
   
   );
