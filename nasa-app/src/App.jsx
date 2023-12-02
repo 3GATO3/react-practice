@@ -35,7 +35,7 @@ function App() {
   const api_key = "EGgzSKry2LEE3qcoEnUhBCtKexmfhUnCLsvVuDUf";
   const url_apod = `https://api.nasa.gov/planetary/apod?api_key=${api_key}`;
   const [isVisible, setIsVisible] = useState(false);
-
+  
   const fadeIn = useSpring({ opacity: isVisible ? 1 : 0 });
 
   const imageAnimation = useSpring({
@@ -63,6 +63,9 @@ function App() {
     fetchData();
   }, []);
 
+
+  
+
   return (
     <div className="min-h-screen flex items-center justify-center text-white bg-gradient-to-b from-gray-900 to-gray-800">
       <header className="text-center">
@@ -81,10 +84,8 @@ function App() {
             </div>
           </div>
         )}
-      </header>
 
-      
-        <div>
+      <div className="text-center py-8">
           <PhotoList
           rover={'curiosity'}
           sol={1000}
@@ -92,6 +93,10 @@ function App() {
           page={1}
           apiKey={api_key}/>
         </div>
+      </header>
+
+      
+
       
     </div>
   );

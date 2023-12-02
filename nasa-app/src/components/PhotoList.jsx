@@ -26,10 +26,11 @@ const PhotoList = ({ rover, sol, camera, page, apiKey }) => {
 
 
 
-          const responseSelectedRover = await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedRover}`,
+          const responseSelectedRover = await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/${response.data.rovers[0].name}`,
           { params: { api_key: apiKey } }
           );
-          setSelectedCamera(responseSelectedRover.data.rover.cameras[0].name)
+          const cameraSe=responseSelectedRover.data.rover.cameras[0].name
+          setSelectedCamera(cameraSe)
           setCameras(responseSelectedRover.data.rover.cameras)
 
           console.log("data :",responseSelectedRover.data)
@@ -66,60 +67,62 @@ const PhotoList = ({ rover, sol, camera, page, apiKey }) => {
   }, [selectedCamera,selectedRover, apiKey]);
 
   return (
-    <div>
-      <h2>Photos from Mars {selectedRover}  {selectedCamera}</h2>
-      <label>Select rover</label>
-
-
-      <select
-        value={selectedRover}
-        onChange={(e) => {
-          console.log("Selected Rover: ", e.target.value);
-          setSelectedRover(e.target.value);
-        }}
-      >
-        {rovers.map((rover) => (
-          <option key={rover.id} value={rover.name}>
-            {rover.name}
-          </option>
-        ))}
-      </select>
-
-
-
-
-      <label>Select camera</label>
-    {console.log("Cameras: ", cameras)}
-      <select
-        value={selectedCamera}
-        onChange={(e) => {
-          console.log("Selected Camera: ", e.target.value);
-          setSelectedCamera(e.target.value);
-        }}
-      >
-        {cameras.map((camera) => (
-          <option key={camera.name} value={camera.name}>
-            {camera.name}
-          </option>
-        ))}
-      </select>
-
-
-
-
-
-      <ul>
-        {photos && photos.length > 0 ? (
-          photos.map((photo) => (
-            <li key={photo.id}>
-              <img src={photo.img_src} alt="" />
-            </li>
-          ))
-        ) : (
-          <li> No phots available </li>
-        )}
-      </ul>
+    <div className="mb-4">
+    <h2 className="text-xl font-semibold mb-4">Photos from Mars </h2>
+  
+    <div className="mb-4 flex flex-col sm:flex-row">
+      <div className="mb-2 sm:mb-0 sm:mr-4">
+        <label className="block text-sm font-semibold mb-1">Select Rover:</label>
+        <select
+          value={selectedRover}
+          onChange={(e) => {
+            console.log("Selected Rover: ", e.target.value);
+            setSelectedRover(e.target.value);
+          }}
+        >
+          {rovers.map((rover) => (
+            <option key={rover.id} value={rover.name}>
+              {rover.name}
+            </option>
+          ))}
+        </select>
+      </div>
+  
+      <div>
+        <label className="block text-sm font-semibold mb-1">Select Camera:</label>
+        <select
+          value={selectedCamera}
+          onChange={(e) => {
+            console.log("Selected Camera: ", e.target.value);
+            setSelectedCamera(e.target.value);
+          }}
+        >
+          {cameras.map((camera) => (
+            <option key={camera.name} value={camera.name}>
+              {camera.name}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
+  
+    <ul className="mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {photos && photos.length > 0 ? (
+        photos.map((photo) => (
+          <li key={photo.id} className="relative group mb-4">
+            <img
+              src={photo.img_src}
+              alt=""
+              className="w-full h-full object-cover rounded-md transition-transform transform group-hover:scale-105"
+            />
+          </li>
+        ))
+      ) : (
+        <li className="text-center"> No photos available </li>
+      )}
+    </ul>
+  </div>
+  
   );
 };
 
