@@ -38,7 +38,6 @@ const PhotoList = ({ rover, sol, camera, page, apiKey }) => {
   const [cameras, setCameras] = useState([]);
   const [selectedCamera, setSelectedCamera]=useState("")
   const [expandedImage, setExpandedImage]=useState(null);
-  const [expandedImageSrc, setExpandedImageSrc]=useState(null);
   const handleImageClick=(photo)=>{
     console.log("Clicked photo:", photo);
 
@@ -77,8 +76,6 @@ const PhotoList = ({ rover, sol, camera, page, apiKey }) => {
           setSelectedCamera(cameraSe)
           setCameras(responseSelectedRover.data.rover.cameras)
 
-          console.log("data :",responseSelectedRover.data)
-          console.log("set intial camera name"+responseSelectedRover.data.rover.cameras[0].name)
         }
       } catch (error) {
         console.error("error fetching rovers", error);
@@ -96,8 +93,6 @@ const PhotoList = ({ rover, sol, camera, page, apiKey }) => {
             { params: { api_key: apiKey } }
           );
           console.log("Api response: ", response.data);
-          console.log("Selected Rover in fetchPhotos: ", selectedRover);
-          console.log("Selected camera in fetchPhotos: ", selectedCamera);
 
           setPhotos(response.data.photos);
         } else {

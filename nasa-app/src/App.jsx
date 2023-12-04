@@ -8,6 +8,7 @@ import { useSpring, animated } from "react-spring";
 import StarSky from "react-star-sky";
 import "react-star-sky/dist/index.css";
 import PhotoList from "./components/PhotoList";
+import Rovers from "./components/Rovers";
 function App() {
   const particlesConfig = {
     particles: {
@@ -118,7 +119,24 @@ function App() {
             apiKey={api_key}
           />
         </div>
+
+
+
+
+        
+    <div>
+      <Rovers
+      apiKey={api_key}
+      />
+    </div>
+
+
+
       </div>
+
+
+
+
     </div>
   );
 }
